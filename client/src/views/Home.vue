@@ -26,8 +26,6 @@
 
 <script>
 import { ref } from 'vue'
-import axios from 'axios'
-import cheerio from 'cheerio'
 import Query, { LoginForm } from '@/services/queries/'
 
 export default {
