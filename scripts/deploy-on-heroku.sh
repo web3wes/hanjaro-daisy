@@ -6,7 +6,7 @@
 APP_NAME=hangullo-staging-app
 heroku login --interactive
 heroku buildpacks:set heroku/python --app $APP_NAME 
-heroku buildpacks:add https://github.com/wention/BeautifulSoup4.git  --app $APP_NAME 
+heroku buildpacks:remove https://github.com/wention/BeautifulSoup4.git  --app $APP_NAME 
 heroku addons:create heroku-postgresql:hobby-dev --app $APP_NAME
 heroku buildpacks:add --index 1 heroku/nodejs --app $APP_NAME
 
