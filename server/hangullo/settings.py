@@ -213,7 +213,7 @@ STATIC_URL = "/static/"
 MEDIA_URL = "/media/"
 # Django will look for client-side build files in this directory
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "../client/public/static"),
+    os.path.join(BASE_DIR, "../client/public/dist"),
 ]
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
