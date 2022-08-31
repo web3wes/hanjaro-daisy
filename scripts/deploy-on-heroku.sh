@@ -5,7 +5,8 @@
 # if you run it again make and the app is aleady created on heroku make sure to comment lines 6:29 
 APP_NAME=hangullo-staging-app
 heroku login --interactive
-heroku create $APP_NAME --buildpack heroku/python
+heroku buildpacks:set heroku/python --app $APP_NAME 
+heroku buildpacks:add https://github.com/wention/BeautifulSoup4.git  --app $APP_NAME 
 heroku addons:create heroku-postgresql:hobby-dev --app $APP_NAME
 heroku buildpacks:add --index 1 heroku/nodejs --app $APP_NAME
 
