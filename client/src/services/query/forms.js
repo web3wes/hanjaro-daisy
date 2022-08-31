@@ -5,9 +5,10 @@ import Form, {
   EmailValidator,
 } from '@thinknimble/tn-forms'
 
-export class LoginForm extends Form {
-  static email = new FormField({ validators: [new RequiredValidator(), new EmailValidator()] })
-  static password = new FormField({ validators: [new RequiredValidator()] })
+export class HomeForm extends Form {
+  static Hangul_search = new FormField({
+    validators: [],
+  })
 }
 
 export class SignupForm extends Form {

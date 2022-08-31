@@ -6,6 +6,8 @@ from drf_yasg.views import get_schema_view
 from rest_auth import views as rest_auth_views
 from rest_framework import permissions
 from rest_framework_nested import routers
+from django.views.decorators.csrf import csrf_exempt
+from graphene_django.views import GraphQLView
 
 from hangullo.core import views as core_views
 
@@ -18,6 +20,7 @@ router.register("users", core_views.UserViewSet)
 urlpatterns = [
     path("api/", include(router.urls)),
     path("api/login/", core_views.UserLoginView.as_view()),
+    path("api/word/", core_views.WordView.as_view()),
     path(r"api/logout/", rest_auth_views.LogoutView.as_view()),
     path(
         r"api/password/reset/confirm/",
@@ -43,6 +46,7 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = urlpatterns + [
+    path("graphql", csrf_exempt(GraphQLView.as_view(graphiql=settings.DEBUG))),
     re_path(r"^docs/swagger(?P<format>\.json|\.yaml)$", schema_view.without_ui(cache_timeout=0), name="schema-json"),
     path(r"docs/swagger/", schema_view.with_ui("swagger", cache_timeout=0), name="schema-swagger-ui"),
     path(r"docs/redoc/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),

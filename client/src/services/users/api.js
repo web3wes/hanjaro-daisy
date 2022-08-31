@@ -35,9 +35,9 @@ export default class UserAPI extends ModelAPI {
         apiErrorHandler({
           apiName: 'UserAPI.login',
           enable400Alert: false,
-          enable500Alert: false
+          enable500Alert: false,
         }),
-    )
+      )
   }
 
   registerUser(d) {

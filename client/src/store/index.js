@@ -1,23 +1,32 @@
 import { createStore } from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
-import { SET_USER } from './mutation-types'
+import { SET_USER, SET_WORDS } from './mutation-types'
 
 const STORAGE_HASH = 'Ax4XDbqIDE'
 export const STORAGE_KEY = `Hangullo-${STORAGE_HASH}`
 
 const state = {
-  user: null,
+  user: 'null',
+  words: '',
 }
 
 const mutations = {
   [SET_USER]: (state, payload) => {
     state.user = payload
   },
+
+  [SET_WORDS]: (state, payload) => {
+    state.words = payload?.data
+    console.log(payload)
+  },
 }
 
 const actions = {
   setUser({ commit }, user) {
     commit(SET_USER, user)
+  },
+  currentWords({ commit }, payload) {
+    commit(SET_WORDS, payload)
   },
 }
 
@@ -28,6 +37,11 @@ const getters = {
   user: (state) => {
     return state.user
   },
+
+  words: (state) => {
+    return state.words
+  },
+
   token: (state) => {
     return state.user ? state.user.token : null
   },

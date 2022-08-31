@@ -1,5 +1,14 @@
 <template>
   <div class="login">
+    <InputField
+      v-model:value="form.email.value"
+      :errors="form.email.errors"
+      @blur="form.email.validate()"
+      type="email"
+      data-cy="email"
+      label="Email:"
+      placeholder="Email"
+    />
     <form @submit.prevent="attemptLogin()">
       <InputField
         v-model:value="form.email.value"

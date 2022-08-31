@@ -12,13 +12,15 @@ from rest_framework import generics, mixins, permissions, status, viewsets
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
+import requests
+from bs4 import BeautifulSoup
 
 from hangullo.utils.emails import send_html_email
 
 from .models import User
 from .permissions import CreateOnlyPermissions
 
-from .serializers import UserLoginSerializer, UserSerializer
+from .serializers import UserLoginSerializer, UserSerializer, UserRegistrationSerializer
 
 
 # Serve React frontend
@@ -32,6 +34,8 @@ class UserLoginView(generics.GenericAPIView):
     serializer_class = UserLoginSerializer
     authentication_classes = ()
     permission_classes = ()
+
+    print("in view")
 
     def post(self, request, *args, **kwargs):
         """
@@ -48,6 +52,31 @@ class UserLoginView(generics.GenericAPIView):
 
         response_data = UserLoginSerializer.login(user, request)
         return Response(response_data)
+
+
+class WordView(generics.GenericAPIView):
+    # serializer_class = UserLoginSerializer
+    # authentication_classes = ()
+    # permission_classes = ()
+
+    print("in view")
+
+    def post(self, request, *args, **kwargs):
+        print(request.data['search'])
+        URL = f'https://www.sayjack.com/korean/korean-hanja/characters/title:{request.data["search"]}'
+        
+        page = requests.get(URL)
+
+        soup = BeautifulSoup(page.content, "html.parser")
+        mydivs = soup.find_all("dd", {"class": "content_1Zyt"})
+        defintions = mydivs[len(mydivs)//2:]
+
+        responses = []
+        for defintion in defintions:
+            print(defintion.contents)
+            responses.append(defintion.contents[0])
+        
+        return Response(responses)
 
 
 # TODO: Add relevant mixins to manipulate users via API

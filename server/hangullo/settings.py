@@ -88,6 +88,10 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
+GRAPHENE = {
+    'SCHEMA': 'hangullo.core.schema.schema'
+}
+
 OLD_PASSWORD_FIELD_ENABLED = True
 LOGIN_URL = "rest_framework:login"
 LOGOUT_URL = "rest_framework:logout"
@@ -209,7 +213,7 @@ STATIC_URL = "/static/"
 MEDIA_URL = "/media/"
 # Django will look for client-side build files in this directory
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "../client/dist/static"),
+    os.path.join(BASE_DIR, "../client/public/static"),
 ]
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",

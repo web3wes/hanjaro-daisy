@@ -12,4 +12,3 @@ defintions = mydivs[len(mydivs)//2:]
 
 for defintion in defintions:
     print(defintion.contents)
-# print(definiton)

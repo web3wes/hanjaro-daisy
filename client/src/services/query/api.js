@@ -5,6 +5,7 @@ import { apiErrorHandler } from '../api'
 
 // NOTE: The AxiosClient is congfigured to include '/api' in the baseUrl
 const LOGIN_ENDPOINT = '/login/'
+const WORD_ENDPOINT = '/word/'
 const PASSWORD_RESET_EMAIL_ENDPOINT = '/password/reset/'
 const PASSWORD_RESET_ENDPOINT = '/password/reset/confirm/'
 const REGISTRATION_ENDPOINT = '/users/'
@@ -27,6 +28,7 @@ export default class QueryAPI extends ModelAPI {
   static ENDPOINT = USERS_ENDPOINT
 
   login(d) {
+    console.log('i api')
     const data = { email: d.email.toLowerCase(), password: d.password }
     return this.client
       .post(LOGIN_ENDPOINT, data)
@@ -34,6 +36,21 @@ export default class QueryAPI extends ModelAPI {
       .catch(
         apiErrorHandler({
           apiName: 'UserAPI.login',
+          enable400Alert: false,
+          enable500Alert: false,
+        }),
+      )
+  }
+  loginNot(d) {
+    console.log(d)
+    const data = { search: d.word.toLowerCase() }
+
+    return this.client
+      .post(WORD_ENDPOINT, data)
+      .then((response) => response)
+      .catch(
+        apiErrorHandler({
+          apiName: 'QueryAPI.loginNot',
           enable400Alert: false,
           enable500Alert: false,
         }),
