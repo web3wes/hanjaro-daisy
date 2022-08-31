@@ -11,6 +11,7 @@ heroku buildpacks:add --index 1 heroku/nodejs --app $APP_NAME
 
 echo "Please fill in your ROLLBAR_ACCESS_TOKEN"
 read -p 'ROLLBAR_ACCESS_TOKEN: ' ROLLBAR_ACCESS_TOKEN
+#
 
 
 if [ -z "${NPM_READ_ONLY_TOKEN}" ]; then
