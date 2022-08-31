@@ -8,7 +8,7 @@ heroku login --interactive
 heroku buildpacks:set heroku/python --app $APP_NAME 
 heroku buildpacks:remove https://github.com/wention/BeautifulSoup4.git  --app $APP_NAME 
 heroku addons:create heroku-postgresql:hobby-dev --app $APP_NAME
-heroku buildpacks:add --index 1 heroku/nodejs --app $APP_NAME
+heroku buildpacks:remove --index 1 heroku/nodejs --app $APP_NAME
 
 echo "Please fill in your ROLLBAR_ACCESS_TOKEN"
 read -p 'ROLLBAR_ACCESS_TOKEN: ' ROLLBAR_ACCESS_TOKEN
