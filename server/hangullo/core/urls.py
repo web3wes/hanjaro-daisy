@@ -20,7 +20,7 @@ router.register("users", core_views.UserViewSet)
 urlpatterns = [
     path("api/", include(router.urls)),
     path("api/login/", core_views.UserLoginView.as_view()),
-    # path("api/word/", core_views.WordView.as_view()),
+    path("api/word/", core_views.WordView.as_view()),
     path(r"api/logout/", rest_auth_views.LogoutView.as_view()),
     path(
         r"api/password/reset/confirm/",
