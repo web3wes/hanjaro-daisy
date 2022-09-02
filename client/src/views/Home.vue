@@ -66,6 +66,7 @@ export default {
       // unwrap form
 
       console.log('connect')
+      console.log('connect2')
       const unwrappedForm = form.value
       console.log(store.state)
 
