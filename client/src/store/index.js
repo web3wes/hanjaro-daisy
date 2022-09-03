@@ -3,7 +3,7 @@ import createPersistedState from 'vuex-persistedstate'
 import { SET_USER, SET_WORDS } from './mutation-types'
 
 const STORAGE_HASH = 'Ax4XDbqIDE'
-export const STORAGE_KEY = `Hangullo-${STORAGE_HASH}`
+export const STORAGE_KEY = `Hangullo-daisy${STORAGE_HASH}`
 
 const state = {
   user: 'null',
