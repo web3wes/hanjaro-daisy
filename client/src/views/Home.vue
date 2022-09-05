@@ -10,10 +10,41 @@
         placeholder="Enter Hangul"
       />
 
-      <div>{{ doneTodosCount }}</div>
-
       <button data-cy="submit" type="submit">Login</button>
     </form>
+
+    <div class="overflow-x-auto">
+      <table class="table w-full table-zebra">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Word</th>
+            <th>Definition</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>1</th>
+            <td>{{ doneTodosCount[0] }}</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th>2</th>
+            <td>{{ doneTodosCount[1] }}</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th>3</th>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
@@ -24,6 +55,27 @@ import { useRouter } from 'vue-router'
 import { HomeForm } from '@/services/query'
 import InputField from '@/components/inputs/InputField'
 import Queries from '../services/query'
+
+const people = [
+  {
+    name: 'Calvin Hawkins',
+    email: 'calvin.hawkins@example.com',
+    image:
+      'https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+  },
+  {
+    name: 'Kristen Ramos',
+    email: 'kristen.ramos@example.com',
+    image:
+      'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+  },
+  {
+    name: 'Ted Fox',
+    email: 'ted.fox@example.com',
+    image:
+      'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+  },
+]
 
 export default {
   name: 'Login',
@@ -43,6 +95,7 @@ export default {
       return this.$store.getters.words
     },
   },
+
   setup() {
     const store = useStore()
     const router = useRouter()
@@ -86,6 +139,7 @@ export default {
     return {
       form,
       attemptLogin,
+      people,
     }
   },
 }
