@@ -6,15 +6,14 @@
         :errors="form.Hangul_search.errors"
         type="text"
         data-cy="word_search"
-        label="Enter hangul:"
         placeholder="Enter Hangul"
       />
 
-      <button data-cy="submit" type="submit">Login</button>
+      <button data-cy="submit" type="submit">Search</button>
     </form>
 
     <div class="overflow-x-auto">
-      <table class="table w-full table-zebra">
+      <table class="table w-full table-zebra mt-10">
         <thead>
           <tr>
             <th></th>

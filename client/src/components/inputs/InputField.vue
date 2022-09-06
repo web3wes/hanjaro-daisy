@@ -10,7 +10,7 @@
       @input="$emit('input', $event)"
       @blur="$emit('blur')"
       @focus="$emit('focus', $event)"
-      class="input"
+      class="input bg-gray-200"
     />
     <ul v-if="errors.length">
       <li
