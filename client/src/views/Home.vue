@@ -1,48 +1,61 @@
 <template>
   <div class="login">
-    <form @submit.prevent="attemptLogin()">
-      <InputField
-        v-model:value="form.Hangul_search.value"
-        :errors="form.Hangul_search.errors"
-        type="text"
-        data-cy="word_search"
-        placeholder="Enter Hangul"
-      />
-
-      <button data-cy="submit" type="submit">Search</button>
-    </form>
-
-    <div class="overflow-x-auto">
-      <table class="table w-full table-zebra mt-10">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Word</th>
-            <th>Definition</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th>1</th>
-            <td>{{ doneTodosCount[0] }}</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th>2</th>
-            <td>{{ doneTodosCount[1] }}</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th>3</th>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="grid grid-cols-5 gap-3">
+      <div>
+        <form @submit.prevent="attemptLogin()">
+          <InputField
+            v-model:value="form.Hangul_search.value"
+            :errors="form.Hangul_search.errors"
+            type="text"
+            data-cy="word_search"
+            placeholder="Enter Hangul"
+          />
+        </form>
+        <div class="grid grid-cols-4 gap-3">
+          <div class="col-span-2 bg-blue-600" @click="attemptLogin()">
+            <button data-cy="submit" type="submit">Search</button>
+          </div>
+          <div class="col-span-2 bg-blue-600">
+            <button data-cy="submit" type="submit" @click="test(form.Hangul_search.value)">
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-span-4">
+        <div class="overflow-x-auto">
+          <table class="table w-full table-zebra mt-10">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Word</th>
+                <th>Definition</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>1</th>
+                <td>{{ doneTodosCount[0] }}</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <th>2</th>
+                <td>{{ doneTodosCount[1] }}</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <th>3</th>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -85,6 +98,7 @@ export default {
   data() {
     return {
       words: 'dad',
+      saveWords: 'savedWords',
     }
   },
 
@@ -100,18 +114,10 @@ export default {
     const router = useRouter()
     const form = ref(new HomeForm())
 
-    async function handleLoginSuccess(user) {
-      await store.dispatch('setUser', user)
-      const redirectPath = router.currentRoute.value.query.redirect
-      if (redirectPath) {
-        router.push({ path: redirectPath })
-      } else {
-        router.push({ name: 'Dashboard' })
-      }
-    }
-
-    function handleLoginFailure(error) {
-      alert(error)
+    async function test() {
+      // const unwrappedForm = form.value
+      console.log('saving ' + store.getters.words)
+      this.saveWords = await Queries.api.savedWord({ saveWord: store.getters.words })
     }
 
     async function attemptLogin() {
@@ -139,6 +145,7 @@ export default {
       form,
       attemptLogin,
       people,
+      test,
     }
   },
 }
