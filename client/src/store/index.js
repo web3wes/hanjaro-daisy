@@ -6,7 +6,7 @@ const STORAGE_HASH = 'Ax4XDbqIDE'
 export const STORAGE_KEY = `Hangullo-daisy${STORAGE_HASH}`
 
 const state = {
-  user: 'null',
+  user: '',
   words: '',
 }
 
