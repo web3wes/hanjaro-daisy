@@ -57,6 +57,22 @@ export default class QueryAPI extends ModelAPI {
       )
   }
 
+  savedWord(d) {
+    console.log(d.saveWord)
+    const data = { search: d }
+
+    return this.client
+      .post(WORD_ENDPOINT, data)
+      .then((response) => response)
+      .catch(
+        apiErrorHandler({
+          apiName: 'QueryAPI.loginNot',
+          enable400Alert: false,
+          enable500Alert: false,
+        }),
+      )
+  }
+
   registerUser(d) {
     const data = {
       firstName: d.firstName,

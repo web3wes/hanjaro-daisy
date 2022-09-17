@@ -6,6 +6,7 @@ const routes = [
   {
     path: '/',
     name: 'Home',
+    beforeEnter: requireAuth,
     component: Home,
   },
   {
