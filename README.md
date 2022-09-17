@@ -2,6 +2,8 @@
 
 This is a Vue3 app hosted on Heroku with a Postgres DB. The legacy name for this app was Hangullo, so things in the code may still reflect that at this point.
 
+(Bug/Prevent-Auto-login is the most current branch)
+
 ## Usage
 
 Hanjaro is intended to help users easily convert the Hanja characters that sino korean characters are based into english, by scraping https://www.sayjack.com/ at the time of the request.
