@@ -1,6 +1,7 @@
 import uuid  # noqa
 
 from django.contrib.auth.models import AbstractUser, BaseUserManager
+from django.contrib.postgres.fields import ArrayField
 from django.contrib.auth.tokens import default_token_generator
 from django.db import models
 
@@ -42,6 +43,9 @@ class UserManager(BaseUserManager):
         ordering = ("id",)
 
 
+
+
+
 class User(AbstractUser, AbstractBaseModel):
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
@@ -69,3 +73,21 @@ class User(AbstractUser, AbstractBaseModel):
 
     class Meta:
         ordering = ["email"]
+
+
+class Saved_Words(AbstractBaseModel):
+    # comments = models.ForeignKey(User, related_name="exports", on_delete=models.CASCADE)
+    
+    definitions = ArrayField(models.CharField(max_length=150, blank=True),size=8)
+    hanja_word = models.CharField(max_length=255, null=True, blank=True)
+    user = models.ForeignKey(User, default=None, null=True, on_delete=models.CASCADE)
+   
+    # content = models.CharField(max_length=255, null=True, blank=True)
+    # link = models.CharField(max_length=255, null=True, blank=True)
+    # modality = models.CharField(max_length=255, null=True, blank=True)
+
+    # def fetch_survey(self):
+    #     return QualtricsApi.get_survey(self.survey_id)
+
+    def __str__(self):
+        return str(self.definitions)
