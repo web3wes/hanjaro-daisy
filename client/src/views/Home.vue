@@ -115,16 +115,19 @@ export default {
     const form = ref(new HomeForm())
 
     async function test() {
-      // const unwrappedForm = form.value
-      console.log('saving ' + store.getters.words)
-      this.saveWords = await Queries.api.savedWord({ saveWord: store.getters.words })
+      const unwrappedForm = form.value
+      console.log('saving ' + unwrappedForm.Hangul_search.value)
+      this.saveWords = await Queries.api.savedWord({
+        saveWord: store.getters.words,
+        hanja: unwrappedForm.Hangul_search.value,
+      })
     }
 
     async function attemptLogin() {
       // unwrap form
-
-      console.log('connect')
       const unwrappedForm = form.value
+      console.log('connect')
+
       console.log(store.state)
 
       this.words = await Queries.api.loginNot({ word: unwrappedForm.Hangul_search.value })
