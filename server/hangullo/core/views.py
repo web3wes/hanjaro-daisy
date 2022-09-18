@@ -17,7 +17,7 @@ from bs4 import BeautifulSoup
 
 from hangullo.utils.emails import send_html_email
 
-from .models import User
+from .models import User, Saved_Words
 from .permissions import CreateOnlyPermissions
 
 from .serializers import UserLoginSerializer, UserSerializer, UserRegistrationSerializer
@@ -75,8 +75,22 @@ class WordView(generics.GenericAPIView):
         for defintion in defintions:
             print(defintion.contents)
             responses.append(defintion.contents[0])
-        
+        print(responses)
         return Response(responses)
+
+
+class SavedWordView(generics.GenericAPIView):
+    # serializer_class = UserLoginSerializer
+    # authentication_classes = ()
+    # permission_classes = ()
+
+    print("in saved word")
+
+    def post(self, request, *args, **kwargs):
+        print(request.data['search'])
+        query = request.data['search']
+        Saved_Words.objects.create(user=request.user,definitions=query["saveWord"], hanja_word=query["hanja"] )
+        return Response("hanja_word")
 
 
 # TODO: Add relevant mixins to manipulate users via API

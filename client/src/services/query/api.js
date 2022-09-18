@@ -6,6 +6,7 @@ import { apiErrorHandler } from '../api'
 // NOTE: The AxiosClient is congfigured to include '/api' in the baseUrl
 const LOGIN_ENDPOINT = '/login/'
 const WORD_ENDPOINT = '/word/'
+const SAVE_WORD_ENDPOINT = '/save-word/'
 const PASSWORD_RESET_EMAIL_ENDPOINT = '/password/reset/'
 const PASSWORD_RESET_ENDPOINT = '/password/reset/confirm/'
 const REGISTRATION_ENDPOINT = '/users/'
@@ -62,7 +63,7 @@ export default class QueryAPI extends ModelAPI {
     const data = { search: d }
 
     return this.client
-      .post(WORD_ENDPOINT, data)
+      .post(SAVE_WORD_ENDPOINT, data)
       .then((response) => response)
       .catch(
         apiErrorHandler({

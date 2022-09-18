@@ -33,7 +33,7 @@ STAFF_EMAIL = config("STAFF_EMAIL", default="no-reply@thinknimble.com")
 # Domain Configuration
 #
 CURRENT_DOMAIN = config("CURRENT_DOMAIN")
-CURRENT_PORT = config("CURRENT_PORT")
+# CURRENT_PORT = config("CURRENT_PORT")
 HEROKU_APP_NAME = config("HEROKU_APP_NAME", default=None)
 ALLOWED_HOSTS = []
 ALLOWED_HOSTS += config("ALLOWED_HOSTS", cast=lambda v: [s.strip() for s in v.split(",")])
@@ -272,7 +272,7 @@ DATA_UPLOAD_MAX_MEMORY_SIZE = 104857600  # i.e. 100 MB
 # ADMIN
 # ------------------------------------------------------------------------------
 # Django Admin URL.
-ADMIN_URL = "staff/"
+ADMIN_URL = "admin/"
 # https://docs.djangoproject.com/en/dev/ref/settings/#admins
 ADMINS = [("ThinkNimble", "support@thinknimble.com")]
 # https://docs.djangoproject.com/en/dev/ref/settings/#managers
