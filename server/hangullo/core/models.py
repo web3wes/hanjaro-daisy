@@ -76,18 +76,16 @@ class User(AbstractUser, AbstractBaseModel):
 
 
 class Saved_Words(AbstractBaseModel):
-    # comments = models.ForeignKey(User, related_name="exports", on_delete=models.CASCADE)
-    
+
     definitions = ArrayField(models.CharField(max_length=150, blank=True),size=8)
     hanja_word = models.CharField(max_length=255, null=True, blank=True)
     user = models.ForeignKey(User, default=None, null=True, on_delete=models.CASCADE)
    
-    # content = models.CharField(max_length=255, null=True, blank=True)
-    # link = models.CharField(max_length=255, null=True, blank=True)
-    # modality = models.CharField(max_length=255, null=True, blank=True)
 
-    # def fetch_survey(self):
-    #     return QualtricsApi.get_survey(self.survey_id)
+    def __get__(self):
+        print("returned from descriptor object")
+        print("hi")
+        return {self.hanja_word}
 
-    def __str__(self):
-        return str(self.definitions)
+    # def __str__(self): 
+    #     return str(self.hanja_word)

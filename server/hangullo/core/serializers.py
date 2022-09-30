@@ -4,6 +4,7 @@ from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 
 from .models import User
+from .models import Saved_Words
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -45,7 +46,11 @@ class UserLoginSerializer(serializers.ModelSerializer):
         response_data["token"] = auth_token.key
         return response_data
 
-
+class SavedWordsSerializer(serializers.ModelSerializer):
+   
+    class Meta:
+        model=Saved_Words
+        fields='__all__'
 class UserRegistrationSerializer(serializers.ModelSerializer):
     class Meta:
         model = User

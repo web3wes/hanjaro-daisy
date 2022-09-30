@@ -12,6 +12,7 @@ from rest_framework import generics, mixins, permissions, status, viewsets
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
+from django.http import HttpResponse
 import requests
 from bs4 import BeautifulSoup
 
@@ -20,7 +21,7 @@ from hangullo.utils.emails import send_html_email
 from .models import User, Saved_Words
 from .permissions import CreateOnlyPermissions
 
-from .serializers import UserLoginSerializer, UserSerializer, UserRegistrationSerializer
+from .serializers import UserLoginSerializer, UserSerializer, UserRegistrationSerializer, SavedWordsSerializer
 
 
 # Serve React frontend
@@ -78,11 +79,28 @@ class WordView(generics.GenericAPIView):
         print(responses)
         return Response(responses)
 
+class LoadView(generics.GenericAPIView):
+    serializer_class = SavedWordsSerializer
+  
+
+    print("in view")
+
+    def get(self, request, *args, **kwargs):
+
+        print(request)
+        words =  Saved_Words.objects.filter(user=request.user)
+        responses = []
+        for word in words:
+            print({"word": word.hanja_word})
+            responses.append({"word":word.hanja_word, "definitions": word.definitions })
+    
+        print(responses)
+        return Response(responses)
+
+    
+
 
 class SavedWordView(generics.GenericAPIView):
-    # serializer_class = UserLoginSerializer
-    # authentication_classes = ()
-    # permission_classes = ()
 
     print("in saved word")
 
